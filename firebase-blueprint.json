@@ -1,0 +1,206 @@
+{
+  "entities": {
+    "userProfile": {
+      "title": "UserProfile",
+      "description": "User preferences, demographics and leveling statistics",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "course": { "type": "string" },
+        "year": { "type": "string" },
+        "targetExam": { "type": "string" },
+        "dailyStudyGoal": { "type": "number" },
+        "preferredStudyHours": { "type": "number" },
+        "xp": { "type": "number" },
+        "level": { "type": "number" },
+        "streak": { "type": "number" },
+        "longestStreak": { "type": "number" },
+        "lastActiveDate": { "type": "string" }
+      },
+      "required": ["uid", "name", "xp", "level"]
+    },
+    "subject": {
+      "title": "Subject",
+      "description": "Academic subject being tracked",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "color": { "type": "string" },
+        "targetStudyHours": { "type": "number" },
+        "completedHours": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "color"]
+    },
+    "topic": {
+      "title": "Topic",
+      "description": "Specific topic or chapter within a subject",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "title": { "type": "string" },
+        "priority": { "type": "string", "enum": ["🌸 Easy", "⭐ Important", "🔥 Urgent"] },
+        "isCompleted": { "type": "boolean" },
+        "syllabusProgress": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "subjectId", "title", "priority", "isCompleted"]
+    },
+    "task": {
+      "title": "Task",
+      "description": "Individual study task or action item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "topicId": { "type": "string" },
+        "title": { "type": "string" },
+        "priority": { "type": "string", "enum": ["🌸 Easy", "⭐ Important", "🔥 Urgent"] },
+        "deadline": { "type": "string" },
+        "targetHours": { "type": "number" },
+        "isCompleted": { "type": "boolean" },
+        "completedAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "priority", "isCompleted"]
+    },
+    "goal": {
+      "title": "Goal",
+      "description": "A garden goal representing long-term study deliverables that grows a flower",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "stage": { "type": "string", "enum": ["Seed", "Plant", "Flower", "Tree"] },
+        "progress": { "type": "number" },
+        "targetDays": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "stage", "progress"]
+    },
+    "note": {
+      "title": "Note",
+      "description": "Markdown study note",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "isFavorite": { "type": "boolean" },
+        "isPinned": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "content", "isFavorite", "isPinned"]
+    },
+    "revision": {
+      "title": "Revision",
+      "description": "Scheduled revision session for Spaced Repetition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "topicId": { "type": "string" },
+        "intervalDays": { "type": "number", "enum": [1, 3, 7, 15, 30] },
+        "scheduledDate": { "type": "string" },
+        "isCompleted": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "topicId", "intervalDays", "scheduledDate", "isCompleted"]
+    },
+    "achievement": {
+      "title": "Achievement",
+      "description": "Gamification badges and rewards unlocked",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "code": { "type": "string" },
+        "unlockedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "code", "unlockedAt"]
+    },
+    "notification": {
+      "title": "Notification",
+      "description": "Local/In-app reminder and alerts list",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "type": { "type": "string" },
+        "isRead": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "body", "isRead", "createdAt"]
+    },
+    "pomodoroSession": {
+      "title": "PomodoroSession",
+      "description": "A focused study session record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "duration": { "type": "number" },
+        "mode": { "type": "string", "enum": ["Focus", "Break", "Long Break"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "duration", "mode", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "userProfile",
+      "description": "User details and leveling statistics"
+    },
+    "users/{userId}/subjects/{subjectId}": {
+      "schema": "subject",
+      "description": "Subject folders"
+    },
+    "users/{userId}/topics/{topicId}": {
+      "schema": "topic",
+      "description": "Chapters or study nodes"
+    },
+    "users/{userId}/tasks/{taskId}": {
+      "schema": "task",
+      "description": "A study action item"
+    },
+    "users/{userId}/goals/{goalId}": {
+      "schema": "goal",
+      "description": "A plant or seed in the Study Garden"
+    },
+    "users/{userId}/notes/{noteId}": {
+      "schema": "note",
+      "description": "Study notes markdown"
+    },
+    "users/{userId}/revisions/{revisionId}": {
+      "schema": "revision",
+      "description": "Revision schedule dates"
+    },
+    "users/{userId}/achievements/{achievementId}": {
+      "schema": "achievement",
+      "description": "Unlocked developer trophies"
+    },
+    "users/{userId}/notifications/{notificationId}": {
+      "schema": "notification",
+      "description": "Cute smart reminders list"
+    },
+    "users/{userId}/pomodoroSessions/{pomodoroSessionId}": {
+      "schema": "pomodoroSession",
+      "description": "Timer completion track logs"
+    }
+  }
+}

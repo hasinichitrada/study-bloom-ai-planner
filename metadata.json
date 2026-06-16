@@ -1,0 +1,6 @@
+{
+  "name": "Study Bloom",
+  "description": "Grow your knowledge one study session at a time. A premium cute productivity planner with an animated mascot companion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
